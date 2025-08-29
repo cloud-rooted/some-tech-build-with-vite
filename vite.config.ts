@@ -1,17 +1,16 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
-import path from 'node:path'
+// vite.config.ts
+import { defineConfig } from "vite"
+import react from "@vitejs/plugin-react-swc"
+import { fileURLToPath } from "url"
+import { dirname, resolve } from "path"
 
-// https://vitejs.dev/config/
+const __dirname = dirname(fileURLToPath(import.meta.url))
+
 export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src'),
+      "@": resolve(__dirname, "src"),
     },
-  },
-  server: {
-    port: 5173,
-    open: true,
   },
 })
