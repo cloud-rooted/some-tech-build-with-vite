@@ -4,8 +4,8 @@ import type { Session, User } from '@supabase/supabase-js'
 
 // Initialize Supabase client
 const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || 'your-supabase-url',
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'your-supabase-anon-key'
+  import.meta.env.VITE_PUBLIC_SUPABASE_URL || '',
+  import.meta.env.VITE_PUBLIC_SUPABASE_ANON_KEY || ''
 )
 
 type SourceChunk = {
@@ -161,7 +161,7 @@ export default function SecureRAGHome() {
         formData.append('content', content)
       }
 
-      const response = await fetch('/api/save', {
+      const response = await fetch('http://localhost:5000/api/save', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${session.access_token}`
@@ -212,7 +212,7 @@ export default function SecureRAGHome() {
 
     setLoading(true)
     try {
-      const response = await fetch('/api/ask', {
+      const response = await fetch('http://localhost:5000/api/ask', {
         method: 'POST',
         headers: getAuthHeaders(),
         body: JSON.stringify({ question })
